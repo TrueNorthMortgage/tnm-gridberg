@@ -1,0 +1,12 @@
+{
+    "name": "truenorthmortgage/tnm-gridberg",
+    "description": "Gridberg",
+    "authors": [
+        {
+            "name": "True North Mortgage"
+        }
+    ],
+    "autoload": {
+        "psr-4": { "truenorthmortgage\\tnm-gridberg\\": "scss/" }
+    }
+}

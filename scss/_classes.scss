@@ -1,0 +1,36 @@
+.grid {
+    margin-left: -$column-padding-left;
+    margin-right: -$column-padding-right;
+    @include clearfix;
+}
+[class*='col-'] {
+    float: left;
+    padding-right: $column-padding-right;
+    padding-left: $column-padding-left;
+}
+
+[class*='col-'].kill-the-padding {
+    padding-right: 0px;
+    padding-left: 0px;
+}
+.clearfix {
+    @include clearfix;
+}
+.img-responsive {
+    @include img-responsive;
+}
+.disable-scrolling {
+    overflow: hidden;
+}
+//faux tables
+.faux-table {
+    display: table;
+    width: 100%;
+    .faux-row {
+        display: table-row;
+        width: 100%;
+        .faux-cell {
+            display: table-cell;
+        }
+    }
+}
