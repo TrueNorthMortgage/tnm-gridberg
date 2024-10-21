@@ -1,0 +1,78 @@
+/*
+
+  Gridberg 4.0.0
+
+  (\/) (°,,,°) (\/)
+
+  Author - Jacob Dyck
+
+*/
+
+@use "sass:math";
+
+@import '_mixins.scss';
+
+@mixin breakpoint($break, $rule: max-width) {
+    @media handheld, only screen and (#{$rule}: map-get($breakpoints, $break)) {
+        @content;
+    }
+}
+
+/* CSS Resets */
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	-webkit-tap-highlight-color: transparent !important;
+    outline: none;
+}
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+	-webkit-text-size-adjust: 100%;
+  -moz-osx-font-smoothing: grayscale;
+}
+a {
+    text-decoration: none;
+}
+ol, ul {
+	list-style: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/* Global Grid Stuff */
+*, *:after, *:before {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+body {
+    min-width: 320px;
+}
+
+@import '_classes.scss';
+
+/*Columns*/
+$col: $total-columns;
+@while $col > -1 {
+  .col-#{$col}-#{$total-columns} { width: math.div($col, $total-columns) * 100%; }
+  $col: $col - 1;
+}
+
+@each $label, $breakpoint in $breakpoints {
+  @include breakpoint($label) {
+    $i: index($breakpoints, $breakpoint);
+    $col: $total-columns;
+    @while $col > -1 {
+      .col-#{$label}-#{$col}-#{$total-columns} { width: math.div($col, $total-columns) * 100%; }
+      $col: $col - 1;
+    }
+  }
+}
